@@ -3,47 +3,15 @@ const {createApp} = Vue;
 createApp ({
   data(){
     return {
-      mails: [
-        {
-          primaMail: ""
-        },
-        {
-          seondaMail: ""
-        },
-        {
-          terzaMail: ""
-        },
-        {
-          quartaMail: ""
-        },
-        {
-          quintaMail: ""
-        },
-        {
-          sestaMail: ""
-        },
-        {
-          settiamMail: ""
-        },
-        {
-          ottavaMail: ""
-        },
-        {
-          nonaMail: ""
-        },
-        {
-          decimaMail: ""
-        }
-      ],
+      randomMail: []
     }
   },
-
-  methods: {
-    generaMail(){
-      axios.get('https://flynn.boolean.careers/exercises/api/random/mail').then((result) => {
-      console.log(result.data)
-
-      this.primaMail = result.data.response})
+  mounted(){
+    for(let i = 0; i < 10; i++){
+      axios.get('https://flynn.boolean.careers/exercises/api/random/mail').then(( response ) => {
+        this.randomMail.push(response.data.response)
+      })
+      console.log(this.randomMail)
     }
   }
-})
+}).mount("#app"); 
